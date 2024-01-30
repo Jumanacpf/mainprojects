@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Student,login1,agency,job,application
+from .models import Student,Login1,Agency,Job,Application
 
 # Register your models here.
 admin.site.register(Student)
-admin.site.register(agency)
-admin.site.register(login1)
-admin.site.register(job)
-admin.site.register(application)
+admin.site.register(Agency)
+admin.site.register(Login1)
+admin.site.register(Job)
+admin.site.register(Application)

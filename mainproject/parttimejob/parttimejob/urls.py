@@ -15,24 +15,46 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from jobportal import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name="index"),
     path('about',views.about),
-    path('contact',views.contact),
-    path('jobcentre',views.job),
+    path('service',views.service),
     path('trainer',views.trainer),
+
     path('std_register', views.std_register),
     path('stdedit', views.stdedit),
     path('stdview',views.stdview),
+    path('stdhome',views.stdhome),
+    path('stdreview',views.stdreview),
+
+    path('jobview',views.jobview),
+    path('jobsearch',views.jobsearch,name="jobsearch"),
+    path('job_applications',views.job_applications),
+    path('job_applied/<int:jobid>',views.job_applied,name="job_applied"),
+
     path('agency_register', views.agency_register),
+    path('agencyhome',views.agencyhome),
+    path('agencyedit', views.agencyedit),
+    path('agencyview', views.agencyview),
+
     path('aslogin', views.aslogin),
     path('aslogout',views.aslogout),
+
     path('addjob',views.addjob),
-    path('editjob',views.editjob),
-    path('jobview',views.jobview),
-    path('application',views.appn)
+    path('editjob/<int:jobid>',views.editjob,name="editjob"),
+    path('delete/<int:jobid>',views.delete,name="delete"),
+    path('jobaview',views.jobaview),
+    path('history',views.history),
+
+    path('applicationrequest/<int:id>',views.applicationrequest,name="applicationrequest"),
+    path('requestview',views.requestview,name="requestview")
 
 ]
+
+if settings.DEBUG:
+    urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

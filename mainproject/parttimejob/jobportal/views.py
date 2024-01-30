@@ -1,13 +1,16 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Student
-from .models import agency
-from .models import login1
-from .models import job
-from .models import application
+from .models import Agency
+from .models import Login1
+from .models import Job
+from .models import Application
 
 
 # Create your views here.
+
+def stdhome(request):
+    return render(request,'student/stdhome.html')
 
 def std_register(request):
     if request.method=='POST':
@@ -22,66 +25,118 @@ def std_register(request):
         resume=request.FILES['image']
         password = request.POST['password']
         try:
+            data = Login1.objects.create(username=username,
+                                         password=password,
+                                         usertype=1)
+            data.save()
             details=Student.objects.create(
+                                           login_id=data,
                                            first_name=first_name,
                                            last_name=last_name,
-                                           username=username,
                                            email=email,
                                            address=address,
                                            gender=gender,
                                            phone=phone,
                                            qualification=qualification,
-                                           resume=resume,
-                                           password=password)
+                                           resume=resume)
             details.save()
-
-            data = login1.objects.create(username=username,
-                                         password=password,
-                                         usertype=1)
-            data.save()
-            return render(request, 'agency_reg.html', {'register': 'You are Registered'})
+            return redirect(aslogin)
+            # return render(request, 'agency_reg.html', {'register': 'You are Registered'})
         except Exception as e:
-            return HttpResponse("Username already exists. Please choose a different username.")
+            return HttpResponse(e)
     else:
-        return render(request,'std_reg.html')
+        return render(request,'student/std_reg.html')
 
 def stdedit(request):
+    id=request.session['id']
+    user=Login1.objects.get(id=id)
+    std=Student.objects.get(login_id=user.id)
     if request.method == 'POST':
-        std_id = int(request.POST['std_id'])
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
-        username = request.POST['username']
         email = request.POST['email']
         address = request.POST['address']
         gender = request.POST['gender']
         phone = request.POST['phone']
         qualification = request.POST['qualification']
         resume = request.FILES['image']
-        password = request.POST['password']
-        detail = Student.objects.filter(id=std_id).update(first_name=first_name,
+        detail = Student.objects.update(first_name=first_name,
                                                           last_name=last_name,
-                                                          username=username,
                                                           email=email,
                                                           address=address,
                                                           gender=gender,
                                                           phone=phone,
                                                           qualification=qualification,
-                                                          resume=resume,
-                                                          password=password)
-        return render(request, 'stdedit.html', {'edit': 'Edit profile successfully'})
+                                                          resume=resume)
+
+        return render(request,'student/stdhome.html')
     else:
-        return render(request, 'stdedit.html')
+        return render(request, 'student/stdedit.html',{'std':std})
 
 def stdview(request):
     if 'id' in request.session:
-        id=request.session['id']
-
-        data=Student.objects.get(id=id)
-        print(data)
-        return render(request,'stdview.html',{'data':data})
-
+        user_id=request.session['id']
+        data=Login1.objects.get(id=user_id)
+        user=Student.objects.get(login_id=data.id)
+        return render(request,'student/stdview.html',{'data':user})
     else:
-        return redirect(aslogin)
+        return render(request,'login.html')
+
+def jobsearch(request):
+    if request.method=='POST':
+        jobname=request.POST['jobname']
+        data=Job.objects.filter(jobname__icontains=jobname)
+        return render(request,'student/jobview.html',{'data':data})
+    else:
+        return render(request,'student/jobview.html')
+
+def jobview(request):
+    data = Job.objects.all()
+    return render(request,'student/jobview.html',{'data':data})
+
+def job_applications(request):
+    return render(request,'student/jobapplied.html')
+
+def job_applied(request,jobid):
+    id = request.session['id']
+    login_data = Login1.objects.get(id=id)
+    user=Student.objects.get(login_id=login_data)
+    work=Job.objects.get(id=jobid)
+    data=Application.objects.create(job_id=work,
+                                    std_id=user)
+    data.save()
+    if request.method == 'POST':
+        username=request.POST['username']
+        if Application.objects.filter(std_id=username).exists():
+            return render(request, 'student/jobapplied.html', {'apply': 'you are applied'})
+        else:
+            return render(request, 'student/jobapplied.html')
+    else:
+        return render(request, 'student/jobview.html')
+
+
+
+# def jobapplied(request):
+#     if request.method=='POST':
+#         username=request.POST['username']
+#         if Application.objects.filter(std_id=username).exists():
+#             return render(request, 'student/jobapplied.html', {'apply': 'you are applied'})
+#         else:
+#             return render(request, 'student/jobapplied.html')
+#     else:
+#         return render(request, 'student/jobview.html')
+
+def stdreview(request):
+    id=request.session['id']
+    reviewdata=Login1.objects.get(id=id)
+    user=Student.objects.get(login_id=reviewdata)
+    data=Application.objects.filter(std_id=user)
+    return render(request,'student/stdreview.html',{'data':data})
+
+
+
+def agencyhome(request):
+    return render(request,'agency/agencyhome.html')
 
 def agency_register(request):
     if request.method=='POST':
@@ -90,93 +145,157 @@ def agency_register(request):
         address=request.POST['address']
         phone=request.POST['phone']
         password=request.POST['password']
-        details=agency.objects.create(username=username,
-                                      email=email,
-                                      address=address,
-                                      phone=phone,
-                                      password=password)
-        details.save()
-
-        data=login1.objects.create(username=username,
+        images=request.FILES['images']
+        data=Login1.objects.create(username=username,
                                    password=password,
                                    usertype=0)
         data.save()
+        details=Agency.objects.create(
+                                      login_id=data,
+                                      email=email,
+                                      address=address,
+                                      phone=phone,
+                                      image=images)
+        details.save()
         return redirect(aslogin)
         # return render(request,'agency_reg.html',{'register':'You are Registered'})
     else:
-        return render(request,'agency_reg.html')
+        return render(request,'agency/agency_reg.html')
 
+def agencyview(request):
+    if 'id' in request.session:
+        user_id=request.session['id']
+        data=Login1.objects.get(id=user_id)
+        user=Agency.objects.get(login_id=data.id)
+        return render(request,'agency/agencyview.html',{'data':user})
+    else:
+        return render(request,'login.html')
 
+def agencyedit(request):
+    id=request.session['id']
+    user=Login1.objects.get(id=id)
+    datas=Agency.objects.get(login_id=user)
+    if request.method == 'POST':
+        email = request.POST['email']
+        address = request.POST['address']
+        phone = request.POST['phone']
+        detail = Agency.objects.update(email=email,
+                                       address=address,
+                                       phone=phone)
+
+        return render(request,'agency/agencyhome.html')
+    else:
+        return render(request, 'agency/agencyedit.html',{'datas':datas})
 
 def aslogin(request):
     if request.method=='POST':
         username=request.POST['username']
-        password=request.POST['password']
-        data = login1.objects.get(username=username)
-        print(data)
+        password=int(request.POST['password'])
+        data = Login1.objects.get(username=username)
         if data.password == password:
             request.session['id'] = data.id
             if data.usertype == 0:
-                return HttpResponse("agency login")
+                return render(request,'agency/agencyhome.html')
             elif data.usertype == 1:
-                return HttpResponse("student login")
+                return render(request,'student/stdhome.html')
+            else:
+                return HttpResponse("loggined")
         else:
-            return render(request, 'login.html',{'success':'You are  not loggined'})
+            return render(request, 'login.html',{'error':'You are  not loggined'})
     else:
         return render(request,'login.html')
+
 def addjob(request):
+    id = request.session['id']
+    login_data = Login1.objects.get(id=id)
+    user = Agency.objects.get(login_id=login_data)
     if request.method=='POST':
-        jobs=request.POST['job']
+        jobs=request.POST['jobs']
         location=request.POST['location']
-        data=job.objects.create(job=jobs,location=location)
+        salary=request.POST['salary']
+        description=request.POST['description']
+        data=Job.objects.create(agency_id=user,jobname=jobs,location=location,salary=salary,description=description)
         data.save()
-
-        return render(request,'job.html',{'added':'job added'})
+        return redirect(agencyhome)
     else:
-        return render(request,'job.html')
+        return render(request,'agency/job.html')
 
-def editjob(request):
+def editjob(request,jobid):
+    id=request.session['id']
+    login_data=Login1.objects.get(id=id)
+    user = Agency.objects.get(login_id=login_data)
+    datas=Job.objects.get(id=jobid)
+    print(datas)
+
     if request.method=='POST':
-        job_id=int(request.POST['job_id'])
         jobs=request.POST['job']
         location=request.POST['loc']
-        data=job.objects.filter(job_id=job_id).update(job=jobs,location=location)
-
-        return render(request, 'editjob.html',{'edit':'Edit job successfully'})
+        salary=request.POST['salary']
+        description=request.POST['description']
+        datas.jobname=jobs
+        datas.location=location
+        datas.salary=salary
+        datas.description=description
+        datas.save()
+        return redirect(jobaview)
     else:
-        return render(request,'editjob.html')
+        return render(request,'agency/editjob.html',{'datas':datas})
 
+def jobaview(request):
+    id=request.session['id']
+    login_data=Login1.objects.get(id=id)
+    user = Agency.objects.get(login_id=login_data)
+    data= Job.objects.filter(agency_id=user)
+    print(data)
+    return render(request,'agency/jobaview.html',{'data':data})
 
-def jobview(request):
-    data=job.objects.all()
-    return render(request,'jobview.html',{'data':data})
+def history(request):
+    allapplication=Application.objects.filter(status='approved')
+    return render(request,'agency/history.html',{'allapplication':allapplication})
 
+def delete(request,jobid):
+    id = request.session['id']
+    data = Login1.objects.get(id=id)
+    user = Agency.objects.get(login_id=data)
+    user = Job.objects.filter(id=jobid)
 
-def appn(request):
+    user.delete()
+    return redirect(jobaview)
+
+def requestview(request):
+    allapplication=Application.objects.all().order_by('date')
+    return render(request,'agency/request.html',{'allapplication':allapplication})
+
+def applicationrequest(request,id):
+
+    data=Application.objects.get(id=id)
     if request.method=='POST':
-        date=request.POST['date']
-        status=request.POST['status']
-        data=application.objects.create(date=date,
-                                        status=status)
+        application=request.POST['application']
+        if application=='accepted':
+            data.status='approved'
+        elif application=='rejected':
+            data.status='rejected'
+        elif application=='completed':
+            data.status='completed'
         data.save()
-        return render(request, 'application.html',{'application':'applied successfully'})
-    else:
-        return render(request,'application.html')
+        return redirect(requestview)
+
+
 
 def index(request):
     return render(request,'index.html')
 def about(request):
     return render(request,'about.html')
-def contact(request):
-    return render(request,'contact.html')
-def jobcentre(request):
+def service(request):
     return render(request,'service.html')
 def trainer(request):
     return render(request,'guard.html')
 
+
+
 def aslogout(request):
-    if 'id' in request.session:
+    # if 'id' in request.session:
         request.session.flush()
         return redirect(index)
-    else:
-        return HttpResponse("logout")
+    # else:
+    #     return HttpResponse("logout")
