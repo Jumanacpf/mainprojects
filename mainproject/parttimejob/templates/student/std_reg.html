@@ -89,7 +89,8 @@
     </header>
 
 
-<form method="post" action="std_register" enctype="multipart/form-data" style="margin-bottom: 80px">
+<form method="post" action="{% url 'std_register' %}" enctype="multipart/form-data" style="margin-bottom: 80px;
+background-color: peachpuff;border-radius: 5% 5% 20% 20%;">
     {% csrf_token %}
 
     <h1 class="log">REGISTER</h1>
@@ -178,19 +179,19 @@
             </h5>
           </div>
           <div class="info_contact">
-            <a href="contact" class="">
+            <a href="" class="">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
               <span>
                 Lorem ipsum dolor sit amet,
               </span>
             </a>
-            <a href="contact" class="">
+            <a href="" class="">
               <i class="fa fa-phone" aria-hidden="true"></i>
               <span>
                 Call : +01 1234567890
               </span>
             </a>
-            <a href="contact" class="">
+            <a href="" class="">
               <i class="fa fa-envelope" aria-hidden="true"></i>
               <span>
                 demo@gmail.com
@@ -210,17 +211,17 @@
               <!--</button>-->
             <!--</form>-->
             <div class="social_box">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                 <a href="">
+                <i class="fa fa-facebook" aria-hidden="true" title="facebook"></i>
               </a>
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true" title="twitter"></i>
               </a>
               <a href="">
-                <i class="fa fa-youtube" aria-hidden="true"></i>
+                <i class="fa fa-youtube" aria-hidden="true" title="youtube"></i>
               </a>
               <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true" title="instagram"></i>
               </a>
             </div>
           </div>

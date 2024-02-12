@@ -29,7 +29,21 @@
   <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
+    .parttime{
+      background: linear-gradient(to right,rgba(0,168,253),#fff 35%,#e00a95);
+      background-size: 200% auto;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 3s linear infinite;
+    }
+    @keyframes gradient {
+      0%{background-position: 0% 75%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 70%;}
 
+    }
+  </style>
 </head>
 
 <body>
@@ -62,21 +76,18 @@
                   <a class="nav-link" href="{% url 'index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="service">JobSections </a>
+                  <a class="nav-link" href="{% url 'service' %}">JobSections </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="trainer" > Agency </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="aslogin"> Login </a>
+                  <a class="nav-link" href="{% url 'aslogin' %}"> Login </a>
                 </li>
                   <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Register
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="agency_register">Agency</a></li>
-                  <li><a class="dropdown-item" href="std_register">Student</a></li>
+                  <li><a class="dropdown-item" href="{% url 'agency_register' %}">Agency</a></li>
+                  <li><a class="dropdown-item" href="{% url 'std_register' %}">Student</a></li>
                 </ul>
               </li>
               </ul>
@@ -138,7 +149,7 @@
               <div class="row">
                 <div class="col-md-7">
                   <div class="detail-box">
-                    <h1 style="font-size:60px ">
+                    <h1 style="font-size:60px " class="parttime">
                       Find The Part Time Job That You Deserved
                       <!--<span>-->
                         <!--Our Responsibility-->
@@ -149,7 +160,7 @@
                       <!--sed do eiusmod magna aliqua. Ut enim ad minim veniam-->
                     <!--</p>-->
                     <div class="btn-box">
-                      <a href="about" class="btn-1"> About Us</a>
+                      <a href="{% url 'about' %}" class="btn-1"> About Us</a>
                       <!--<a href="contact" class="btn-2">Contact</a>-->
                     </div>
                   </div>
@@ -162,7 +173,7 @@
               <div class="row">
                 <div class="col-md-7">
                   <div class="detail-box">
-                    <h1  style="font-size:60px ">
+                    <h1  style="font-size:60px "  class="parttime">
                       Find The Best Part Time Job That Fit You
                       <!--<span>-->
                         <!--Our Responsibility-->
@@ -173,7 +184,7 @@
                       <!--sed do eiusmod magna aliqua. Ut enim ad minim veniam-->
                     <!--</p>-->
                     <div class="btn-box">
-                      <a href="about" class="btn-1"> About </a>
+                      <a href="{% url 'about' %}" class="btn-1"> About </a>
                       <!--<a href="contact" class="btn-2">Contact</a>-->
                     </div>
                   </div>
@@ -287,9 +298,6 @@
                 preparation, delivery, and sometimes on-site serving. Caterers tailor their offerings to meet the specific
                 needs and preferences of clients, ranging from casual to formal occasions.
               </p>
-              <!--<a href="">-->
-                <!--Read More-->
-              <!--</a>-->
             </div>
           </div>
         </div>
@@ -306,9 +314,7 @@
                 often focus on providing a positive customer experience and efficient operations to drive sales
                 and build customer loyalty.
               </p>
-              <!--<a href="">-->
-                <!--Read More-->
-              <!--</a>-->
+
             </div>
           </div>
         </div>
@@ -322,8 +328,10 @@
                 Cleaning , Shopkeeping , Cashier , Receptionist , Library Assistant , Food Deliver, Bakery Assistant ,
                 Clerk , Flower Shop Assistant , Gift Shop Sales , Costume Shop Assistant , Newspaper Deliver ,
                 Graphic Design , Child Care .
-
               </p>
+                <a href="{% url 'jobnotapplied' %}">
+                More Jobs
+              </a>
             </div>
 
           </div>
@@ -467,18 +475,34 @@
 
   <!-- team section -->
 
-  <section class="team_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Our Agencies
-        </h2>
-        <!--<p>-->
-          <!--Lorem ipsum dolor sit amet, non odio tincidunt ut ante, lorem a euismod suspendisse vel, sed quam nulla mauris-->
-          <!--iaculis. Erat eget vitae malesuada, tortor tincidunt porta lorem lectus.-->
-        <!--</p>-->
-      </div>
-      <div class="row">
+  <!--<section class="team_section layout_padding">-->
+    <!--<div class="container">-->
+      <!--<div class="heading_container heading_center">-->
+        <!--<h2>-->
+          <!--Our Agencies-->
+        <!--</h2>-->
+        <!--&lt;!&ndash;<p>&ndash;&gt;-->
+          <!--&lt;!&ndash;Lorem ipsum dolor sit amet, non odio tincidunt ut ante, lorem a euismod suspendisse vel, sed quam nulla mauris&ndash;&gt;-->
+          <!--&lt;!&ndash;iaculis. Erat eget vitae malesuada, tortor tincidunt porta lorem lectus.&ndash;&gt;-->
+        <!--&lt;!&ndash;</p>&ndash;&gt;-->
+      <!--</div>-->
+      <!--<div class="row">-->
+        <!--&lt;!&ndash;<div class="col-md-4 col-sm-6 mx-auto ">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="box">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="img-box">&ndash;&gt;-->
+              <!--&lt;!&ndash;<img src="{% static 'image/about-2.jpg' %}" alt="">&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="detail-box">&ndash;&gt;-->
+              <!--&lt;!&ndash;<h5>&ndash;&gt;-->
+                <!--&lt;!&ndash;abc&ndash;&gt;-->
+              <!--&lt;!&ndash;</h5>&ndash;&gt;-->
+              <!--&lt;!&ndash;<h6 class="">&ndash;&gt;-->
+                <!--&lt;!&ndash;Catering Manager&ndash;&gt;-->
+              <!--&lt;!&ndash;</h6>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--<div class="row">-->
         <!--<div class="col-md-4 col-sm-6 mx-auto ">-->
           <!--<div class="box">-->
             <!--<div class="img-box">-->
@@ -486,68 +510,52 @@
             <!--</div>-->
             <!--<div class="detail-box">-->
               <!--<h5>-->
-                <!--abc-->
+                <!--def-->
               <!--</h5>-->
               <!--<h6 class="">-->
-                <!--Catering Manager-->
+                <!--Catering-->
               <!--</h6>-->
             <!--</div>-->
           <!--</div>-->
         <!--</div>-->
-        <div class="row">
-        <div class="col-md-4 col-sm-6 mx-auto ">
-          <div class="box">
-            <div class="img-box">
-              <img src="{% static 'image/about-2.jpg' %}" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                def
-              </h5>
-              <h6 class="">
-                Catering
-              </h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mx-auto ">
-          <div class="box">
-            <div class="img-box">
-              <img src="{% static 'image/about-4.jpg' %}" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                ghi
-              </h5>
-              <h6 class="">
-                Shop owner
-              </h6>
-            </div>
-          </div>
-        </div>
         <!--<div class="col-md-4 col-sm-6 mx-auto ">-->
           <!--<div class="box">-->
             <!--<div class="img-box">-->
-              <!--<img src="{% static 'image/about-1.jpg' %}" alt="">-->
+              <!--<img src="{% static 'image/about-4.jpg' %}" alt="">-->
             <!--</div>-->
             <!--<div class="detail-box">-->
               <!--<h5>-->
-                <!--Nathan Mcpherson-->
+                <!--ghi-->
               <!--</h5>-->
               <!--<h6 class="">-->
-                <!--supervisor-->
+                <!--Shop owner-->
               <!--</h6>-->
             <!--</div>-->
           <!--</div>-->
         <!--</div>-->
-      </div>
-      <!--<div class="btn-box">-->
-        <!--<a href="">-->
-          <!--View All-->
-        <!--</a>-->
+        <!--&lt;!&ndash;<div class="col-md-4 col-sm-6 mx-auto ">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="box">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="img-box">&ndash;&gt;-->
+              <!--&lt;!&ndash;<img src="{% static 'image/about-1.jpg' %}" alt="">&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="detail-box">&ndash;&gt;-->
+              <!--&lt;!&ndash;<h5>&ndash;&gt;-->
+                <!--&lt;!&ndash;Nathan Mcpherson&ndash;&gt;-->
+              <!--&lt;!&ndash;</h5>&ndash;&gt;-->
+              <!--&lt;!&ndash;<h6 class="">&ndash;&gt;-->
+                <!--&lt;!&ndash;supervisor&ndash;&gt;-->
+              <!--&lt;!&ndash;</h6>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
       <!--</div>-->
-    </div>
-  </section>
+      <!--&lt;!&ndash;<div class="btn-box">&ndash;&gt;-->
+        <!--&lt;!&ndash;<a href="">&ndash;&gt;-->
+          <!--&lt;!&ndash;View All&ndash;&gt;-->
+        <!--&lt;!&ndash;</a>&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+  <!--</section>-->
 
   <!-- end team section -->
 
@@ -559,45 +567,47 @@
       <div class="row">
         <div class="col-md-3">
           <div class="info_logo">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{% url 'index' %}">
               <span>
                 Part Time Job
               </span>
             </a>
             <p>
-              dolor sit amet, consectetur magna aliqua. Ut enim ad minim veniam, quisdotempor incididunt r
+              Part-time job have become more popular due to changing work preference
+              ,economic conditions , and lifestyle choices.Because of this , it connect
+              students with part-time job opportunities have become very important .
             </p>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="info_links">
-            <h5>
-              Useful Link
-            </h5>
-            <ul>
-              <li>
-                <a href="">
-                  dolor sit amet, consectetur
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  magna aliqua. Ut enim ad
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  minim veniam,
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  quisdotempor incididunt r
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <!--<div class="col-md-3">-->
+          <!--<div class="info_links">-->
+            <!--<h5>-->
+              <!--Useful Link-->
+            <!--</h5>-->
+            <!--<ul>-->
+              <!--<li>-->
+                <!--<a href="">-->
+                  <!--dolor sit amet, consectetur-->
+                <!--</a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="">-->
+                  <!--magna aliqua. Ut enim ad-->
+                <!--</a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="">-->
+                  <!--minim veniam,-->
+                <!--</a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="">-->
+                  <!--quisdotempor incididunt r-->
+                <!--</a>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
         <div class="col-md-3">
           <div class="info_info">
             <h5>
@@ -607,9 +617,9 @@
           <div class="info_contact">
             <a href="" class="">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>
-                Lorem ipsum dolor sit amet,
-              </span>
+              <!--<span>-->
+                <!--Lorem ipsum dolor sit amet,-->
+              <!--</span>-->
             </a>
             <a href="" class="">
               <i class="fa fa-phone" aria-hidden="true"></i>
@@ -628,26 +638,21 @@
         <div class="col-md-3">
           <div class="info_form ">
             <h5>
-              Newsletter
+              LINKS
             </h5>
-            <form action="#">
-              <input type="email" placeholder="Enter your email">
-              <button>
-                Subscribe
-              </button>
-            </form>
+
             <div class="social_box">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <a href="">
+                <i class="fa fa-facebook" aria-hidden="true" title="facebook"></i>
               </a>
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true" title="twitter"></i>
               </a>
               <a href="">
-                <i class="fa fa-youtube" aria-hidden="true"></i>
+                <i class="fa fa-youtube" aria-hidden="true" title="youtube"></i>
               </a>
               <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true" title="instagram"></i>
               </a>
             </div>
           </div>

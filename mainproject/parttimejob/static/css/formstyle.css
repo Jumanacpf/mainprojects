@@ -5,12 +5,27 @@
     text-align: center;
 }
 form{
-    /*border: double;*/
+
     margin-right: 350px;
     margin-left: 400px;
     margin-top: 30px;
     text-align: center;
     padding-bottom: 60px;
-    background-color: gray;
+    background-color: peachpuff;
+    border: 5px ridge #E3651D;
+
 }
+.submit{
+    background-color: peru;
+    border-radius: 13px;
+    height: 40px;
+    width: 70px;
+}
+.submit:hover {
+    color: saddlebrown;
+}
+
+
+
+
 

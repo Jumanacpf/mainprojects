@@ -24,6 +24,7 @@ def std_register(request):
         qualification=request.POST['qualification']
         resume=request.FILES['image']
         password = request.POST['password']
+
         try:
             data = Login1.objects.create(username=username,
                                          password=password,
@@ -52,22 +53,19 @@ def stdedit(request):
     user=Login1.objects.get(id=id)
     std=Student.objects.get(login_id=user.id)
     if request.method == 'POST':
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email = request.POST['email']
-        address = request.POST['address']
-        gender = request.POST['gender']
-        phone = request.POST['phone']
-        qualification = request.POST['qualification']
-        resume = request.FILES['image']
-        detail = Student.objects.update(first_name=first_name,
-                                                          last_name=last_name,
-                                                          email=email,
-                                                          address=address,
-                                                          gender=gender,
-                                                          phone=phone,
-                                                          qualification=qualification,
-                                                          resume=resume)
+        std.first_name = request.POST['first_name']
+        std.last_name = request.POST['last_name']
+        std.email = request.POST['email']
+        std.address = request.POST['address']
+        std.gender = request.POST['gender']
+        std.phone = request.POST['phone']
+        std.qualification = request.POST['qualification']
+
+        if std.resume == request.FILES:
+            std.resume=request.FILES['image']
+        std.save()
+
+
 
         return render(request,'student/stdhome.html')
     else:
@@ -90,41 +88,40 @@ def jobsearch(request):
     else:
         return render(request,'student/jobview.html')
 
-def jobview(request):
-    data = Job.objects.all()
-    return render(request,'student/jobview.html',{'data':data})
 
-def job_applications(request):
-    return render(request,'student/jobapplied.html')
+def jobnotapplied(request):
+    id = request.session['id']
+    login_data = Login1.objects.get(id=id)
+    stddet = Student.objects.filter(login_id=login_data)
+    applied_data=Application.objects.filter(std_id=stddet,status='approved').values_list('job_id',flat=True)
+    job_notapplied=Job.objects.exclude(application__status='approved')
+    return render(request,'student/jobview.html',{'job_notapplied':job_notapplied})
+
+def job_applications(request,jobid):
+    id = request.session['id']
+    login_data = Login1.objects.get(id=id)
+    user = Student.objects.get(login_id=login_data)
+    work = Job.objects.get(id=jobid)
+    return render(request, 'student/jobapplied.html',{'work':work})
 
 def job_applied(request,jobid):
     id = request.session['id']
     login_data = Login1.objects.get(id=id)
     user=Student.objects.get(login_id=login_data)
     work=Job.objects.get(id=jobid)
-    data=Application.objects.create(job_id=work,
-                                    std_id=user)
-    data.save()
     if request.method == 'POST':
-        username=request.POST['username']
-        if Application.objects.filter(std_id=username).exists():
-            return render(request, 'student/jobapplied.html', {'apply': 'you are applied'})
-        else:
-            return render(request, 'student/jobapplied.html')
+        description = request.POST['description']
+        data=Application.objects.create(job_id=work,
+                                        std_id=user,
+                                        description=description)
+        data.save()
+        if Application.objects.filter(std_id=user).exists():
+
+            return render(request, 'student/jobapplied.html', {'apply': 'you are applied','work':work})
+        # else:
+            # return render(request, 'student/jobapplied.html')
     else:
-        return render(request, 'student/jobview.html')
-
-
-
-# def jobapplied(request):
-#     if request.method=='POST':
-#         username=request.POST['username']
-#         if Application.objects.filter(std_id=username).exists():
-#             return render(request, 'student/jobapplied.html', {'apply': 'you are applied'})
-#         else:
-#             return render(request, 'student/jobapplied.html')
-#     else:
-#         return render(request, 'student/jobview.html')
+        return render(request, 'student/jobapplied.html')
 
 def stdreview(request):
     id=request.session['id']
@@ -176,12 +173,10 @@ def agencyedit(request):
     user=Login1.objects.get(id=id)
     datas=Agency.objects.get(login_id=user)
     if request.method == 'POST':
-        email = request.POST['email']
-        address = request.POST['address']
-        phone = request.POST['phone']
-        detail = Agency.objects.update(email=email,
-                                       address=address,
-                                       phone=phone)
+        datas.email = request.POST['email']
+        datas.address = request.POST['address']
+        datas.phone = request.POST['phone']
+        datas.save()
 
         return render(request,'agency/agencyhome.html')
     else:
@@ -201,7 +196,7 @@ def aslogin(request):
             else:
                 return HttpResponse("loggined")
         else:
-            return render(request, 'login.html',{'error':'You are  not loggined'})
+            return render(request, 'login.html',{'error':'Invalid Credential'})
     else:
         return render(request,'login.html')
 
@@ -249,25 +244,13 @@ def jobaview(request):
     print(data)
     return render(request,'agency/jobaview.html',{'data':data})
 
-def history(request):
-    allapplication=Application.objects.filter(status='approved')
-    return render(request,'agency/history.html',{'allapplication':allapplication})
 
-def delete(request,jobid):
-    id = request.session['id']
-    data = Login1.objects.get(id=id)
-    user = Agency.objects.get(login_id=data)
-    user = Job.objects.filter(id=jobid)
 
-    user.delete()
-    return redirect(jobaview)
 
-def requestview(request):
-    allapplication=Application.objects.all().order_by('date')
-    return render(request,'agency/request.html',{'allapplication':allapplication})
+
+
 
 def applicationrequest(request,id):
-
     data=Application.objects.get(id=id)
     if request.method=='POST':
         application=request.POST['application']
@@ -280,6 +263,32 @@ def applicationrequest(request,id):
         data.save()
         return redirect(requestview)
 
+def delete(request,jobid):
+    id = request.session['id']
+    data = Login1.objects.get(id=id)
+    user = Agency.objects.get(login_id=data)
+    user = Job.objects.filter(id=jobid)
+    user.delete()
+    return redirect(jobaview)
+
+def requestview(request):
+    id = request.session['id']
+    login_data = Login1.objects.get(id=id)
+    agencydet = Agency.objects.get(login_id=login_data)
+    user = Job.objects.filter(agency_id=agencydet)
+    allapplication=Application.objects.filter(job_id__agency_id=agencydet).order_by('date')
+    print(allapplication)
+    return render(request,'agency/request.html',{'allapplication':allapplication})
+
+
+def history(request):
+    id = request.session['id']
+    login_data = Login1.objects.get(id=id)
+    agencydet=Agency.objects.get(login_id=login_data)
+    user =Job.objects.filter(agency_id=agencydet)
+    allapplication=Application.objects.filter(status='approved',job_id__agency_id=agencydet)
+    return render(request,'agency/history.html',{'allapplication':allapplication})
+
 
 
 def index(request):
@@ -288,8 +297,7 @@ def about(request):
     return render(request,'about.html')
 def service(request):
     return render(request,'service.html')
-def trainer(request):
-    return render(request,'guard.html')
+
 
 
 

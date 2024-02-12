@@ -32,7 +32,7 @@
 
 </head>
 
-<body >
+<body style="background: gray">
   <div class="hero_area" style="background-color: white">
     <!-- header section strats -->
     <div class="hero_bg_box">
@@ -56,21 +56,19 @@
                 <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color: black">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="service" style="color: black">Jobsection</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'service' %}" style="color: black">Jobsection</a>
               </li>
-               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="trainer" style="color: black">Agencies</a>
-              </li>
+
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="aslogin" style="color: black">Login</a>
+                <a class="nav-link" aria-current="page" href="{% url 'aslogin' %}" style="color: black">Login</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
                   Register
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="agency_register" style="color: black">Agency</a></li>
-                  <li><a class="dropdown-item" href="std_register" style="color: black">Student</a></li>
+                  <li><a class="dropdown-item" href="{% url 'agency_register' %}" style="color: black">Agency</a></li>
+                  <li><a class="dropdown-item" href="{% url 'std_register' %}" style="color: black">Student</a></li>
                 </ul>
               </li>
             </ul>
@@ -143,9 +141,9 @@
       <div class="row">
         <div class="col-md-3">
           <div class="info_logo">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{% url 'index' %}">
               <span>
-                Part Time Job
+                PART TIME JOB
               </span>
             </a>
             <p>
@@ -154,39 +152,11 @@
             </p>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="info_links">
-            <h5>
-              Useful Link
-            </h5>
-            <ul>
-              <li>
-                <a href="">
-                  dolor sit amet, consectetur
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  magna aliqua. Ut enim ad
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  minim veniam,
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  quisdotempor incididunt r
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+
         <div class="col-md-3">
           <div class="info_info">
             <h5>
-              Contact Us
+              COTANCT US
             </h5>
           </div>
           <div class="info_contact">
@@ -213,26 +183,21 @@
         <div class="col-md-3">
           <div class="info_form ">
             <h5>
-              Newsletter
+              LINKS
             </h5>
-            <form action="#">
-              <input type="email" placeholder="Enter your email">
-              <button>
-                Subscribe
-              </button>
-            </form>
+
             <div class="social_box">
               <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-facebook" aria-hidden="true" title="facebook"></i>
               </a>
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true" title="twitter"></i>
               </a>
               <a href="">
-                <i class="fa fa-youtube" aria-hidden="true"></i>
+                <i class="fa fa-youtube" aria-hidden="true" title="youtube"></i>
               </a>
               <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true" title="instagram"></i>
               </a>
             </div>
           </div>

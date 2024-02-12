@@ -56,15 +56,15 @@
           <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
               <ul class="navbar-nav  ">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'agencyhome' %}">Home</a>
               </li>
                <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Job
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="addjob">Add</a></li>
-                  <li><a class="dropdown-item" href="jobaview">View</a></li>
+                  <li><a class="dropdown-item" href="{% url 'addjob' %}">Add</a></li>
+                  <li><a class="dropdown-item" href="{% url 'jobaview' %}">View</a></li>
                 </ul>
               </li>
                <li class="nav-item dropdown">
@@ -72,18 +72,18 @@
                   Profile
                 </a>
                 <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="agencyview">View</a></li>
-                <li><a class="dropdown-item" href="agencyedit">Edit</a></li>
+                <li><a class="dropdown-item" href="{% url 'agencyview' %}">View</a></li>
+                <li><a class="dropdown-item" href="{% url 'agencyedit' %}">Edit</a></li>
                 </ul>
               </li>
                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="requestview">Application</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'requestview' %}">Application</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="history">history</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'history' %}">history</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="aslogout">Logout</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'aslogout' %}">Logout</a>
               </li>
             </ul>
           </div>
@@ -106,14 +106,7 @@
                         <!--Our Responsibility-->
                       <!--</span>-->
                     </h1>
-                    <!--<p>-->
-                      <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit,-->
-                      <!--sed do eiusmod magna aliqua. Ut enim ad minim veniam-->
-                    <!--</p>-->
-                    <!--<div class="btn-box">-->
-                      <!--<a href="about" class="btn-1"> About </a>-->
-                      <!--<a href="contact" class="btn-2">Contact</a>-->
-                    <!--</div>-->
+
                   </div>
                 </div>
               </div>
@@ -130,14 +123,7 @@
                         <!--Our Responsibility-->
                       <!--</span>-->
                     </h1>
-                    <!--<p>-->
-                      <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit,-->
-                      <!--sed do eiusmod magna aliqua. Ut enim ad minim veniam-->
-                    <!--</p>-->
-                    <!--<div class="btn-box">-->
-                      <!--<a href="about" class="btn-1"> About </a>-->
-                      <!--<a href="contact" class="btn-2">Contact</a>-->
-                    <!--</div>-->
+
                   </div>
                 </div>
               </div>
@@ -154,75 +140,32 @@
                         <!--Our Responsibility-->
                       <!--</span>-->
                     </h1>
-                    <!--<p>-->
-                      <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit,-->
-                      <!--sed do eiusmod magna aliqua. Ut enim ad minim veniam-->
-                    <!--</p>-->
-                    <!--<div class="btn-box">-->
-                     <!--<a href="about" class="btn-1"> About </a>-->
-                      <!--<a href="contact" class="btn-2">Contact</a>-->
-                    <!--</div>-->
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        <!--<div class="container idicator_container">-->
-          <!--<ol class="carousel-indicators">-->
-            <!--<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>-->
-            <!--<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>-->
-            <!--<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>-->
-          <!--</ol>-->
-        <!--</div>-->
       </div>
     </section>
-
-
- <!-- info section -->
+<!-- info section -->
   <section class="info_section ">
     <div class="container">
       <div class="row">
         <div class="col-md-3">
           <div class="info_logo">
-            <a class="navbar-brand" href="../index.html">
+            <a class="navbar-brand" href="{% url 'index' %}">
               <span>
                 Part Time Job
               </span>
             </a>
             <p>
-              dolor sit amet, consectetur magna aliqua. Ut enim ad minim veniam, quisdotempor incididunt r
+              Part-time job have become more popular due to changing work preference
+              ,economic conditions , and lifestyle choices.Because of this , it connect
+              students with part-time job opportunities have become very important .
             </p>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="info_links">
-            <h5>
-              Useful Link
-            </h5>
-            <ul>
-              <li>
-                <a href="">
-                  dolor sit amet, consectetur
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  magna aliqua. Ut enim ad
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  minim veniam,
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  quisdotempor incididunt r
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+
         <div class="col-md-3">
           <div class="info_info">
             <h5>
@@ -230,19 +173,19 @@
             </h5>
           </div>
           <div class="info_contact">
-            <a href="contact" class="">
+            <a href="" class="">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>
-                Lorem ipsum dolor sit amet,
-              </span>
+              <!--<span>-->
+                <!--Lorem ipsum dolor sit amet,-->
+              <!--</span>-->
             </a>
-            <a href="contact" class="">
+            <a href="" class="">
               <i class="fa fa-phone" aria-hidden="true"></i>
               <span>
                 Call : +01 1234567890
               </span>
             </a>
-            <a href="contact" class="">
+            <a href="" class="">
               <i class="fa fa-envelope" aria-hidden="true"></i>
               <span>
                 demo@gmail.com
@@ -252,27 +195,22 @@
         </div>
         <div class="col-md-3">
           <div class="info_form ">
-            <!--<h5>-->
-              <!--Newsletter-->
-            <!--</h5>-->
-            <!--<form action="#">-->
-              <!--<input type="email" placeholder="Enter your email">-->
-              <!--<button>-->
-                <!--Subscribe-->
-              <!--</button>-->
-            <!--</form>-->
+            <h5>
+              LINKS
+            </h5>
+
             <div class="social_box">
               <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-facebook" aria-hidden="true" title="facebook"></i>
               </a>
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true" title="twitter"></i>
               </a>
               <a href="">
-                <i class="fa fa-youtube" aria-hidden="true"></i>
+                <i class="fa fa-youtube" aria-hidden="true" title="youtube"></i>
               </a>
               <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true" title="instagram"></i>
               </a>
             </div>
           </div>
@@ -280,7 +218,6 @@
       </div>
     </div>
   </section>
-
   <!-- end info_section -->
 
 

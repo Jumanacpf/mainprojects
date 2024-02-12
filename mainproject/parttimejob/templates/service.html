@@ -57,24 +57,21 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
               </li>
-               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="trainer">Agencies</a>
-              </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="aslogin">Login</a>
+                <a class="nav-link" aria-current="page" href="{% url 'aslogin' %}">Login</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Register
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="agency_register">Agency</a></li>
-                  <li><a class="dropdown-item" href="std_register">Student</a></li>
+                  <li><a class="dropdown-item" href="{% url 'agency_register' %}">Agency</a></li>
+                  <li><a class="dropdown-item" href="{% url 'std_register' %}">Student</a></li>
                 </ul>
               </li>
 
                 <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="about">About</a>
+                <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
               </li>
             </ul>
             <!--<form class="d-flex" role="search">-->
@@ -147,6 +144,10 @@
                 Cleaning , Shopkeeping , Cashier , Receptionist , Library Assistant , Food Deliver, Bakery Assistant ,
                 Clerk , Flower Shop Assistant , Gift Shop Sales , Costume Shop Assistant , Newspaper Deliver ,
                 Graphic Design , Child Care .
+              </p>
+               <a href="jobview">
+                More Jobs
+              </a>
             </div>
 
           </div>
@@ -162,45 +163,47 @@
       <div class="row">
         <div class="col-md-3">
           <div class="info_logo">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{% url 'index' %}">
               <span>
                 Part Time Job
               </span>
             </a>
             <p>
-              dolor sit amet, consectetur magna aliqua. Ut enim ad minim veniam, quisdotempor incididunt r
+              Part-time job have become more popular due to changing work preference
+              ,economic conditions , and lifestyle choices.Because of this , it connect
+              students with part-time job opportunities have become very important .
             </p>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="info_links">
-            <h5>
-              Useful Link
-            </h5>
-            <ul>
-              <li>
-                <a href="">
-                  dolor sit amet, consectetur
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  magna aliqua. Ut enim ad
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  minim veniam,
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  quisdotempor incididunt r
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <!--<div class="col-md-3">-->
+          <!--<div class="info_links">-->
+            <!--<h5>-->
+              <!--Useful Link-->
+            <!--</h5>-->
+            <!--<ul>-->
+              <!--<li>-->
+                <!--<a href="">-->
+                  <!--dolor sit amet, consectetur-->
+                <!--</a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="">-->
+                  <!--magna aliqua. Ut enim ad-->
+                <!--</a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="">-->
+                  <!--minim veniam,-->
+                <!--</a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="">-->
+                  <!--quisdotempor incididunt r-->
+                <!--</a>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
         <div class="col-md-3">
           <div class="info_info">
             <h5>
@@ -210,9 +213,9 @@
           <div class="info_contact">
             <a href="" class="">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>
-                Lorem ipsum dolor sit amet,
-              </span>
+              <!--<span>-->
+                <!--Lorem ipsum dolor sit amet,-->
+              <!--</span>-->
             </a>
             <a href="" class="">
               <i class="fa fa-phone" aria-hidden="true"></i>
@@ -231,26 +234,21 @@
         <div class="col-md-3">
           <div class="info_form ">
             <h5>
-              Newsletter
+              LINKS
             </h5>
-            <form action="#">
-              <input type="email" placeholder="Enter your email">
-              <button>
-                Subscribe
-              </button>
-            </form>
+
             <div class="social_box">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <a href="">
+                <i class="fa fa-facebook" aria-hidden="true" title="facebook"></i>
               </a>
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true" title="twitter"></i>
               </a>
               <a href="">
-                <i class="fa fa-youtube" aria-hidden="true"></i>
+                <i class="fa fa-youtube" aria-hidden="true" title="youtube"></i>
               </a>
               <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true" title="instagram"></i>
               </a>
             </div>
           </div>

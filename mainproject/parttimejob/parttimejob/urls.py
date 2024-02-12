@@ -22,34 +22,34 @@ from jobportal import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name="index"),
-    path('about',views.about),
-    path('service',views.service),
-    path('trainer',views.trainer),
+    path('about',views.about,name="about"),
+    path('service',views.service,name="service"),
 
-    path('std_register', views.std_register),
-    path('stdedit', views.stdedit),
-    path('stdview',views.stdview),
-    path('stdhome',views.stdhome),
-    path('stdreview',views.stdreview),
 
-    path('jobview',views.jobview),
+    path('std_register', views.std_register,name="std_register"),
+    path('stdedit', views.stdedit,name="stdedit"),
+    path('stdview',views.stdview,name="stdview"),
+    path('stdhome',views.stdhome,name="stdhome"),
+    path('stdreview',views.stdreview,name="stdreview"),
+
+    path('jobnotapplied',views.jobnotapplied,name="jobnotapplied"),
     path('jobsearch',views.jobsearch,name="jobsearch"),
-    path('job_applications',views.job_applications),
+    path('job_applications/<int:jobid>',views.job_applications,name="job_applications"),
     path('job_applied/<int:jobid>',views.job_applied,name="job_applied"),
 
-    path('agency_register', views.agency_register),
-    path('agencyhome',views.agencyhome),
-    path('agencyedit', views.agencyedit),
-    path('agencyview', views.agencyview),
+    path('agency_register', views.agency_register,name="agency_register"),
+    path('agencyhome',views.agencyhome,name="agencyhome"),
+    path('agencyedit', views.agencyedit,name="agencyedit"),
+    path('agencyview', views.agencyview,name="agencyview"),
 
-    path('aslogin', views.aslogin),
-    path('aslogout',views.aslogout),
+    path('aslogin', views.aslogin, name="aslogin"),
+    path('aslogout',views.aslogout,name="aslogout"),
 
-    path('addjob',views.addjob),
+    path('addjob',views.addjob,name="addjob"),
     path('editjob/<int:jobid>',views.editjob,name="editjob"),
     path('delete/<int:jobid>',views.delete,name="delete"),
-    path('jobaview',views.jobaview),
-    path('history',views.history),
+    path('jobaview',views.jobaview,name="jobaview"),
+    path('history',views.history,name="history"),
 
     path('applicationrequest/<int:id>',views.applicationrequest,name="applicationrequest"),
     path('requestview',views.requestview,name="requestview")
