@@ -94,8 +94,8 @@ def jobnotapplied(request):
     login_data = Login1.objects.get(id=id)
     stddet = Student.objects.filter(login_id=login_data)
     applied_data=Application.objects.filter(std_id=stddet,status='approved').values_list('job_id',flat=True)
-    job_notapplied=Job.objects.exclude(application__status='approved')
-    return render(request,'student/jobview.html',{'job_notapplied':job_notapplied})
+    data=Job.objects.exclude(application__status='approved')
+    return render(request,'student/jobview.html',{'data':data})
 
 def job_applications(request,jobid):
     id = request.session['id']
@@ -143,6 +143,13 @@ def agency_register(request):
         phone=request.POST['phone']
         password=request.POST['password']
         images=request.FILES['images']
+
+        # if Login1.objects.filter(username=username).exists():
+        #     return render(request,'register.html',{'name_error':'Username already exists'})
+        # if Agency.objects.filter(email=email).exists():
+        #     return render(request,'register.html',{'email_error':'Email already exists'})
+
+
         data=Login1.objects.create(username=username,
                                    password=password,
                                    usertype=0)
@@ -155,7 +162,7 @@ def agency_register(request):
                                       image=images)
         details.save()
         return redirect(aslogin)
-        # return render(request,'agency_reg.html',{'register':'You are Registered'})
+
     else:
         return render(request,'agency/agency_reg.html')
 
@@ -243,12 +250,6 @@ def jobaview(request):
     data= Job.objects.filter(agency_id=user)
     print(data)
     return render(request,'agency/jobaview.html',{'data':data})
-
-
-
-
-
-
 
 def applicationrequest(request,id):
     data=Application.objects.get(id=id)

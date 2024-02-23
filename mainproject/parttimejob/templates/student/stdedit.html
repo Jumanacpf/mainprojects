@@ -80,7 +80,7 @@
       </nav>
     </header>
 
-<form method="post" action="{% url 'stdedit %}'" enctype="multipart/form-data">
+<form method="post" action="{% url 'stdedit' %}" enctype="multipart/form-data">
     {% csrf_token %}
 
      <h1 class="log">Edit Profile</h1>
@@ -134,35 +134,7 @@
             </p>
           </div>
         </div>
-        <!--<div class="col-md-3">-->
-          <!--<div class="info_links">-->
-            <!--<h5>-->
-              <!--Useful Link-->
-            <!--</h5>-->
-            <!--<ul>-->
-              <!--<li>-->
-                <!--<a href="">-->
-                  <!--dolor sit amet, consectetur-->
-                <!--</a>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<a href="">-->
-                  <!--magna aliqua. Ut enim ad-->
-                <!--</a>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<a href="">-->
-                  <!--minim veniam,-->
-                <!--</a>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<a href="">-->
-                  <!--quisdotempor incididunt r-->
-                <!--</a>-->
-              <!--</li>-->
-            <!--</ul>-->
-          <!--</div>-->
-        <!--</div>-->
+
         <div class="col-md-3">
           <div class="info_info">
             <h5>
@@ -221,14 +193,6 @@
 
 
 
-  <!-- footer section -->
-  <!--<footer class="container-fluid footer_section">-->
-    <!--<p>-->
-      <!--&copy; <span id="currentYear"></span> All Rights Reserved. Design by-->
-      <!--<a href="https://html.design/">Free Html Templates</a>-->
-    <!--</p>-->
-  <!--</footer>-->
-  <!-- footer section -->
 
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.js' %}"></script>
